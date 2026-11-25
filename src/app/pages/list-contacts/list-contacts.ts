@@ -6,10 +6,11 @@ import { Component, inject, signal } from "@angular/core";
 import { PhoneBook } from "../../services/phone-book";
 import { Contact } from "../../interfaces/contact";
 import { FormsModule } from "@angular/forms";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-list-contacts',
-  imports: [Container, Header, ContactComponent, Divider, FormsModule],
+  imports: [Container, Header, ContactComponent, Divider, FormsModule, RouterLink],
   templateUrl: './list-contacts.html',
   styleUrl: './list-contacts.css',
 })

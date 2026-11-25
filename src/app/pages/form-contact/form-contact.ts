@@ -3,10 +3,11 @@ import { Container } from '../../components/container/container';
 import { Divider } from '../../components/divider/divider';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-form-contact',
-  imports: [Container, Divider, ReactiveFormsModule, NgClass],
+  imports: [Container, Divider, ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './form-contact.html',
   styleUrl: './form-contact.css',
 })

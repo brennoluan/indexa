@@ -3,6 +3,13 @@
 
   <input type="search" placeholder="Digite para buscar" [(ngModel)]="searchTerm" />
 
+  <section class="adicionar-contato">
+    <button routerLink="/formulario">
+      <img src="images/plus.png" alt="" />
+      <span>Adicionar contato</span>
+    </button>
+  </section>
+
   @for (alfabeth of alfabeth; track alfabeth) {
     @if (getContactsByLetter(alfabeth).length > 0) {
       <app-divider>{{ alfabeth }}</app-divider>
