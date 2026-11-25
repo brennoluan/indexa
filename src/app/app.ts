@@ -6,10 +6,11 @@ import { Divider } from './components/divider/divider';
 import { Contact as ContactComponent } from './components/contact/contact';
 import type { Contact } from './interfaces/contact';
 import { PhoneBook } from './services/phone-book';
+import { FormContact } from './pages/form-contact/form-contact';
 
 @Component({
   selector: 'app-root',
-  imports: [Container, Header, Divider, ContactComponent, FormsModule],
+  imports: [Container, Header, Divider, ContactComponent, FormsModule, FormContact],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
