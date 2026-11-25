@@ -11,5 +11,5 @@ import { Divider } from './components/divider/divider';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('indexa');
+  alfabeth: string = 'abcdefghijklmnopqrstuvwxyz';
 }
