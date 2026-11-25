@@ -2,5 +2,8 @@
   <app-header></app-header>
   @for (alfabeth of alfabeth; track alfabeth) {
     <app-divider>{{ alfabeth }}</app-divider>
+    @for (contact of getContactsByLetter(alfabeth); track contact) {
+      <app-contact name="{{ contact.name }}" phone="{{ contact.phone }}"></app-contact>
+    }
   }
 </app-container>
