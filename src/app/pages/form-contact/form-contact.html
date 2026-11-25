@@ -69,7 +69,7 @@
       formControlName="observations"
     ></textarea>
     <section class="botoes">
-      <button class="botao-cancelar" type="button">Cancelar</button>
+      <button class="botao-cancelar" type="button" (click)="contactForm.reset()">Cancelar</button>
       <button
         [disabled]="contactForm.invalid"
         [ngClass]="contactForm.valid ? 'botao-salvar' : 'botao-desabilitado'"

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Container } from '../../components/container/container';
 import { Divider } from '../../components/divider/divider';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { PhoneBook } from '../../services/phone-book';
 
 @Component({
   selector: 'app-form-contact',
@@ -14,9 +15,8 @@ import { RouterLink } from '@angular/router';
 export class FormContact implements OnInit {
 
   contactForm!: FormGroup;
-
-  constructor() {
-  }
+  private phoneBookService = inject(PhoneBook);
+  private router = inject(Router);
 
   initForm() {
     this.contactForm = new FormGroup({
@@ -35,7 +35,9 @@ export class FormContact implements OnInit {
 
   handleSubmit() {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
+      this.phoneBookService.addContact(this.contactForm.value);
+      this.contactForm.reset();
+      this.router.navigate(['/lista-contatos']);
     }
   }
 }
