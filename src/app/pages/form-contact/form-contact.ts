@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Container } from '../../components/container/container';
 import { Divider } from '../../components/divider/divider';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -11,11 +11,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './form-contact.html',
   styleUrl: './form-contact.css',
 })
-export class FormContact {
+export class FormContact implements OnInit {
 
   contactForm!: FormGroup;
 
   constructor() {
+  }
+
+  initForm() {
     this.contactForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
@@ -24,6 +27,10 @@ export class FormContact {
       social: new FormControl(''),
       observations: new FormControl('')
     });
+  }
+
+  ngOnInit() {
+    this.initForm();
   }
 
   handleSubmit() {
