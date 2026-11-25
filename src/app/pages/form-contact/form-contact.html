@@ -12,6 +12,9 @@
   <form [formGroup]="contactForm" (ngSubmit)="handleSubmit()">
     <label for="name">Nome</label>
     <input type="text" id="name" placeholder="Digite o nome do contato" formControlName="name" />
+    @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+      <div class="mensagem-erro">O nome é obrigatório.</div>
+    }
     <label for="email">Telefone</label>
     <input
       type="text"
@@ -19,6 +22,9 @@
       placeholder="Digite o telefone do contato"
       formControlName="phone"
     />
+    @if (contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched) {
+      <div class="mensagem-erro">O telefone é obrigatório.</div>
+    }
     <label for="email">E-mail</label>
     <input
       type="email"
@@ -26,6 +32,14 @@
       placeholder="Digite o e-mail do contato"
       formControlName="email"
     />
+    @if (contactForm.get('email')?.errors && contactForm.get('email')?.touched) {
+      @if (contactForm.get('email')?.errors?.['required']) {
+        <div class="mensagem-erro">O e-mail é obrigatório.</div>
+      }
+      @if (contactForm.get('email')?.errors?.['email']) {
+        <div class="mensagem-erro">O e-mail deve ser válido.</div>
+      }
+    }
 
     <app-divider></app-divider>
 
@@ -42,7 +56,6 @@
         formControlName="social"
       />
     </div>
-
     <label for="observations">Observações</label>
     <textarea
       id="observations"
@@ -51,7 +64,14 @@
     ></textarea>
     <section class="botoes">
       <button class="botao-cancelar" type="button">Cancelar</button>
-      <button class="botao-salvar" type="submit">Salvar contato</button>
+      <button
+        [disabled]="contactForm.invalid"
+        [ngClass]="contactForm.valid ? 'botao-salvar' : 'botao-desabilitado'"
+        class="botao-salvar"
+        type="submit"
+      >
+        Salvar contato
+      </button>
     </section>
   </form>
 </app-container>

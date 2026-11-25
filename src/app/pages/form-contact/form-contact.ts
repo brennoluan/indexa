@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Container } from '../../components/container/container';
 import { Divider } from '../../components/divider/divider';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-form-contact',
-  imports: [Container, Divider, ReactiveFormsModule],
+  imports: [Container, Divider, ReactiveFormsModule, NgClass],
   templateUrl: './form-contact.html',
   styleUrl: './form-contact.css',
 })
@@ -15,9 +16,9 @@ export class FormContact {
 
   constructor() {
     this.contactForm = new FormGroup({
-      name: new FormControl(''),
-      phone: new FormControl(''),
-      email: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       birthday: new FormControl(''),
       social: new FormControl(''),
       observations: new FormControl('')
