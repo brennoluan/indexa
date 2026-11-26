@@ -1,33 +1,29 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { contacts } from '../data/contacts';
 import type { Contact } from '../interfaces/contact';
+import { Observable } from 'rxjs';
 
 const CONTACTS_KEY = 'contacts';
 @Injectable({
   providedIn: 'root',
 })
 export class PhoneBook {
-  private contacts: Contact[] = contacts;
+  private readonly API_URL = 'http://localhost:3000';
 
-  constructor() {
-    const storedContacts = localStorage.getItem(CONTACTS_KEY);
-    if (storedContacts) {
-      this.contacts = JSON.parse(storedContacts);
-    }
-    localStorage.setItem(CONTACTS_KEY, JSON.stringify(this.contacts));
-  }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  getContacts(): Contact[] {
-    return this.contacts;
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${this.API_URL}/contacts`);
   }
 
   addContact(contact: Contact): void {
-    this.contacts.push(contact);
-    localStorage.setItem(CONTACTS_KEY, JSON.stringify(this.contacts));
+    this.http.post(`${this.API_URL}/contacts`, contact).subscribe();
   }
 
   removeContact(contact: Contact): void {
-    this.contacts = this.contacts.filter(c => c !== contact);
-    localStorage.setItem(CONTACTS_KEY, JSON.stringify(this.contacts));
+    this.http.delete(`${this.API_URL}/contacts/${contact.id}`).subscribe();
   }
 }
