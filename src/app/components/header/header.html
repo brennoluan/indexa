@@ -1,5 +1,13 @@
 <header class="cabecalho">
-  <img src="/images/logo.png" class="logo" />
-  <img src="/images/banner.png" class="banner" />
-  <h1 class="titulo">Organize, <span>conecte,</span> simplifique!</h1>
+  <img src="/images/logo.png" class="logo" alt="Indexa" />
+  @if (!initialScreen()) {
+    <div class="link">
+      <a routerLink="/lista-contatos">
+        <img class="seta" src="images/arrow-left.png" alt="" />
+        Voltar
+      </a>
+    </div>
+  }
+  <img [src]="bannerSrc()" class="banner" alt="" />
+  <h1 [class]="initialScreen() ? 'titulo' : 'titulo-form'" [innerHTML]="title()"></h1>
 </header>
